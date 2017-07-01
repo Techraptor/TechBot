@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import Server, Role
+from discord import Server, Role, ChannelType, Channel
 
 
 class Commands:
@@ -35,34 +35,29 @@ def create_role(server: Server, name: str):
     return Role(**args)
 
 
-def create_channel(server:Server,name:str, *, isVoice:bool=False):
-        
-    def getId():
+def create_channel(server: Server, name: str, is_voice: bool = False):
+    def get_id():
         id = 4
         flag = True
         while flag:
             flag = False
             for channel in server.channel:
-                if(not flag and channel.id == id):
+                if not flag and channel.id == id:
                     flag = True
                     id += 1
-                    
-    args = {}
-    args['id'] = getId()
-    args['server'] = server
 
-    #todo, fix name (lowercase and underscores)
+    args = {'id': get_id(), 'server': server}
+
+    # todo, fix name (lowercase and underscores)
     args['name'] = name
     args['topic'] = None
     args['position'] = -1
-    if isVoice:
+    if is_voice:
         args['bitrate'] = 64
         args['type'] = ChannelType.voice
     else:
         args['bitrate'] = 0
         args['type'] = ChannelType.text
     args['user_limit'] = 0
-        
 
-
-    return Channel(args);
+    return Channel(**args)
