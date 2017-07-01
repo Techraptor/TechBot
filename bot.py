@@ -30,13 +30,7 @@ async def create_role(client: Client, server: Server, name: str):
     uncached = await client.create_role(server, name=name)
     return server.roles.get(uncached.id)  # returns cached role
 
-<<<<<<< HEAD
-async def create_channel(client:Client, server: Server, name: str, is_voice: bool=False):
-    
-=======
-
 async def create_channel(client: Client, server: Server, name: str, is_voice: bool = False):
->>>>>>> origin/master
     channel_type = ChannelType.text
     if is_voice:
         channel_type = ChannelType.voice
