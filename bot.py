@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import Server, Role
+from discord import Server, Role, Channel, ChannelType
 
 
 class Commands:
