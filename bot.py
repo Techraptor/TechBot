@@ -17,23 +17,20 @@ class Commands:
     async def create(self, ctx, name):
         role = await create_role(self.bot, ctx.message.author.server, name)
         await self.bot.add_roles(ctx.message.author, role)  # add role to user
-        self.roles.append(role)  # add role to cache
+        self.roles.append(role)  # add role to cache, when removing, remove from server by ID not instance
 
         self.channels['text'].append(await create_channel(self.bot, ctx.message.author.server, name))
 
         v_channel = await create_channel(self.bot, ctx.message.author.server, name, True)
         await self.bot.move_member(ctx.message.author, v_channel)  # move user to channel
-        self.channels['voice'].append(v_channel)  # add role to cache
-
+        self.channels['voice'].append(v_channel)  # add role to cache, when removing, remove from server by ID not instance
 
 async def create_role(client: Client, server: Server, name: str):
-    uncached = await client.create_role(server, name=name)
-    return get(server.roles, id=uncached.id)
+    return await client.create_role(server, name=name)
 
 
-async def create_channel(client: Client, server: Server, name: str, is_voice: bool = False):
+async def create_channel(client: Client, server: Server, name: str, is_voice: bool=False):
     channel_type = ChannelType.text
     if is_voice:
         channel_type = ChannelType.voice
-    uncached = await client.create_channel(server, name, type=channel_type)
-    return server.get_channel(uncached.id)  # returns cached channel
+    return await client.create_channel(server, name, type=channel_type)
