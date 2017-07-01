@@ -20,7 +20,8 @@ class Commands:
 
 
 async def create_role(client:Client, server: Server, name: str):
-    await client.create_role(server,{'name':name})
+    uncached = await client.create_role(server,{'name':name})
+    return server.roles.get(uncached.id)#returns cached role
     #def get_id():
     #    id = 4
     #    flag = True
@@ -39,7 +40,9 @@ async def create_channel(server: Server, name: str, is_voice: bool=False):
     channel_type = ChannelType.text
     if is_voice:
         channel_type = ChannelType.voice
-    await client.create_channel(server,name,type=channel_type)
+    uncached = await client.create_channel(server,name,type=channel_type)
+    return server.get_channel(uncached.id)#returns cached role
+
     #def get_id():
     #    id = 4
     #    flag = True
