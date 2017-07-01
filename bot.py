@@ -35,6 +35,7 @@ def create_role(server: Server, name: str):
     return Role(**args)
 
 
+def create_channel(server:Server,name:str, *, isVoice:bool=False):
         
     def getId():
         id = 4
