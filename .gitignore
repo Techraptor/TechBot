@@ -103,3 +103,7 @@ ENV/
 # pycharm
 .idea/
 main.py
+*.suo
+GroupCog.py
+*.pyproj
+Techbot.sln
