@@ -11,5 +11,4 @@ async def on_ready():
 
 
 bot.add_cog(Commands(bot))
-
-bot.run('')
+bot.run('MjQ5NzcxNTIwODI0NTczOTUz.CxLLCA.2BKWURhKHwZPuClpdBGEq1E0vMs')
