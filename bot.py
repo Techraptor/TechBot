@@ -35,5 +35,33 @@ def create_role(server: Server, name: str):
     return Role(**args)
 
 
-def create_channel(server: Server, name: str, isVoice: bool):
-    return None
+        
+    def getId():
+        id = 4
+        flag = True
+        while flag:
+            flag = False
+            for channel in server.channel:
+                if(not flag and channel.id == id):
+                    flag = True
+                    id += 1
+                    
+    args = {}
+    args['id'] = getId()
+    args['server'] = server
+
+    #todo, fix name (lowercase and underscores)
+    args['name'] = name
+    args['topic'] = None
+    args['position'] = -1
+    if isVoice:
+        args['bitrate'] = 64
+        args['type'] = ChannelType.voice
+    else:
+        args['bitrate'] = 0
+        args['type'] = ChannelType.text
+    args['user_limit'] = 0
+        
+
+
+    return Channel(args);
