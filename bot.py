@@ -12,14 +12,18 @@ async def on_ready():
 class Commands:
     def __init__(self, bot):
         self.bot = bot
+        self.roles = []
+        self.channels = {'text': [], 'voice': []}
 
     @commands.group(name='group')
     async def group(self):
         pass
 
     @group.command(pass_context=True, no_pm=False)
-    async def create(self, ctx):
-        pass
+    async def create(self, ctx, name):
+        self.roles += create_role(ctx.message.author.server, name)
+        self.channels['text'] += create_channel(ctx.message.author.server, name)
+        self.channels['voice'] += create_channel(ctx.message.author.server, name, True)
 
 
 def create_role(server: Server, name: str):
