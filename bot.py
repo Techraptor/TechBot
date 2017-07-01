@@ -73,7 +73,7 @@ first = True
 def run_timer():
     global first, timer
     today = datetime.now()
-    delta = (today.replace(minute=0) - today).total_seconds()
+    delta = (today.replace(second=0) + timedelta(minutes=1) - today).total_seconds()
     print('timers: {}'.format(delta))
     if delta > 0:
         if not first:
@@ -81,5 +81,5 @@ def run_timer():
             timer = None
         if not timer:
             timer = Timer(delta, run_timer)
-            # timer.start()
+            timer.start()
         first = False
