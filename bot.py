@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord import Server, ChannelType, Client, Channel, Role, HTTPException
 
-from sqlite3
+#from sqlite3
 from discord.utils import get
 from asyncio import sleep
 
