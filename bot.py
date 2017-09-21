@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord import Server, ChannelType, Client, Channel, Role, HTTPException
 
+from sqlite3
 from discord.utils import get
 from asyncio import sleep
 
@@ -29,8 +30,8 @@ class Commands:
                 try:
                     channel = get(group.server.channels, id=group.voice.id)
                     remove = len(channel.voice_members) == 0
-                except:
-                    pass
+                except Exception as e:
+                    print(e)
                 if remove:
                     self.groups.remove(group)
                     await remove_groupinfo(self.bot, group)

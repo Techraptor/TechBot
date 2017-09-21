@@ -7,9 +7,8 @@ bot = commands.Bot(command_prefix=commands.when_mentioned_or('='), description='
 
 @bot.event
 async def on_ready():
-    run_timer()
     print('Logged in as: {0} (ID: {0.id})'.format(bot.user))
 
-
+token = raw_input('Enter your token:'\n)
 bot.add_cog(Commands(bot))
-bot.run('')
+bot.run(token)
